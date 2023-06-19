@@ -5,7 +5,7 @@ const HomePage = () => {
     return (
         <Defaultlayout>
             <p>HOME PAGE</p>
-            <Link to="/translation">Translation example</Link>
+            <Link to={"/translation/" + 1}>Translation example</Link>
         </Defaultlayout>
     )
 }
