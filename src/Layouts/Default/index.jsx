@@ -16,8 +16,7 @@ const Defaultlayout = ({children}) =>{
             >
             <Layout>
             <DefaultHeader/>
-                <Layout>{children}</Layout>
-                
+            <Layout>{children}</Layout>
             <DefaultFooter/>
             </Layout>
                 
