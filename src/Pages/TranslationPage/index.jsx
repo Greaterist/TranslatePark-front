@@ -11,6 +11,7 @@ import { getCommentaries } from "../../api/commentaries";
 import Comments from "../../Components/Comments";
 import TranslationWord from "../../Components/TranslationWord";
 import TextArea from "antd/es/input/TextArea";
+import AddTranslation from "../../Components/AddTranslation";
 
 
 const TranslationPage = () => {
@@ -53,6 +54,7 @@ const TranslationPage = () => {
                 <p className={styles.spelling}>{WordList.spelling}</p>
                 <div className="flex">
                     <TranslationWord word={WordList.translation} opacity={0.5}/>
+                    <AddTranslation word={WordList.word}/>
                 </div>
                 
                 </div>

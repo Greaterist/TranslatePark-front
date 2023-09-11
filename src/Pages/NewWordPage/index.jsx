@@ -80,6 +80,27 @@ const NewWordPage = () => {
             <Input placeholder="Input Word" />
         </Form.Item>
         </Form.Item>
+        <Form.Item
+        label="Spelling"
+        style={{
+            marginBottom: 0,
+        }}
+        >
+        <Form.Item
+            name="Spelling"
+            rules={[
+            {
+                required: true,
+            },
+            ]}
+            style={{
+            display: 'inline-block',
+            width: 'calc(50% - 8px)',
+            }}
+        >
+            <Input placeholder="Input Spelling" />
+        </Form.Item>
+        </Form.Item>
         <Form.Item label=" " colon={false}>
         <Button type="primary" htmlType="submit">
             Submit
