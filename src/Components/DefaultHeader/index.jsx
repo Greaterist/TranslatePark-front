@@ -61,7 +61,11 @@ const DefaultHeader = () => {
             >
                 <Input.Search size="large" placeholder="input here" enterButton />
             </AutoComplete>
-            <Link to="/profile/" className={styles.nav}> <Button>Profile</Button></Link>
+            <div>
+                <Link to="/profile/" className={styles.nav}> <Button>Profile</Button></Link>
+                <Link to="/newword/" className={styles.nav}> <Button>Add New Word</Button></Link>
+            </div>
+            
         </Header>
     )
 }

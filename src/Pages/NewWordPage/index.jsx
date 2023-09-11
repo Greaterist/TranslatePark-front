@@ -1,10 +1,91 @@
+import { Button, Form, Input, Select, Space, Tooltip, Typography } from "antd";
 import Defaultlayout from "../../Layouts/Default";
+import { useState } from "react";
 
-const ProfilePage = () => {
+
+const onFinish = (values) => {
+    console.log('Received values of form: ', values);
+  };
+
+
+  const languageFiller = () => {
+        return ['Zhejiang', 'Jiangsu']
+  }
+
+const NewWordPage = () => {
+ 
+    const [languages, setLanguages] = useState([]);
+    if (languages.length == 0) {
+        setLanguages(languageFiller())
+    }
+
+
+
     return (
         <Defaultlayout>
-            <p>HOME PAGE</p>
-
+            <Form
+    name="complex-form"
+    onFinish={onFinish}
+    labelCol={{
+      span: 8,
+    }}
+    wrapperCol={{
+      span: 16,
+    }}
+    style={{
+      maxWidth: 600,
+    }}
+  >
+        <Form.Item label="Language">
+        <Space.Compact>
+            <Form.Item
+            name={['language', 'province']}
+            noStyle
+            rules={[
+                {
+                required: true,
+                message: 'language is required',
+                },
+            ]}
+            >
+            <Select placeholder="Select language">
+                {languages.map((e)=>{
+                    return(
+                    <Option value={e} key={e}>{e}</Option>
+                    )
+                })}
+            </Select>
+            
+            </Form.Item>
+        </Space.Compact>
+        </Form.Item>
+        <Form.Item
+        label="Word"
+        style={{
+            marginBottom: 0,
+        }}
+        >
+        <Form.Item
+            name="Word"
+            rules={[
+            {
+                required: true,
+            },
+            ]}
+            style={{
+            display: 'inline-block',
+            width: 'calc(50% - 8px)',
+            }}
+        >
+            <Input placeholder="Input Word" />
+        </Form.Item>
+        </Form.Item>
+        <Form.Item label=" " colon={false}>
+        <Button type="primary" htmlType="submit">
+            Submit
+        </Button>
+        </Form.Item>
+    </Form>
             
         </Defaultlayout>
     )
@@ -12,4 +93,4 @@ const ProfilePage = () => {
 
 
 
-export default ProfilePage;
+export default NewWordPage;
