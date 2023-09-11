@@ -4,6 +4,7 @@ import DefaultFooter from '../../Components/DefaultFooter';
 import { Content } from 'antd/es/layout/layout';
 
 
+
 const Defaultlayout = ({children}) =>{
     return (
         <>

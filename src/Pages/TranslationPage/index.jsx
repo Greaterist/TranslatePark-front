@@ -10,16 +10,26 @@ import { Button, Card, Layout, Popover, Statistic } from "antd";
 import { getCommentaries } from "../../api/commentaries";
 import Comments from "../../Components/Comments";
 import TranslationWord from "../../Components/TranslationWord";
+import TextArea from "antd/es/input/TextArea";
 
 
 const TranslationPage = () => {
     const [WordList, setWordList] = useState([]);
     const [CommList, setCommList] = useState([]);
+    const [UserMessage, setUserMessage] = useState('')
     const { id } = useParams();
 
     /*useEffect(async ()=>{
         importWord(await getById(id))
     });*/
+
+    function onMessageChange(e){
+        setUserMessage(e.target.value)
+    }
+
+    function sendMessage(){
+        console.log(UserMessage)//TODO
+    }
 
     useEffect(()=>{
         async function importWord(){
@@ -81,6 +91,19 @@ const TranslationPage = () => {
                             
                         )
                     })}
+                    <TextArea
+                    showCount
+                    maxLength={100}
+                    style={{
+                        height: 120,
+                        resize: 'none',
+                    }}
+                    onChange={onMessageChange}
+                    placeholder="enter your text here..."
+                    />
+                    <Button type="primary" onClick={sendMessage}>
+                        Click me!
+                    </Button>
                 </Card>
                 
             </Footer>

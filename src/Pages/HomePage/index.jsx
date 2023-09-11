@@ -6,6 +6,7 @@ const HomePage = () => {
         <Defaultlayout>
             <p>HOME PAGE</p>
             <Link to={"/translation/" + 1}>Translation example</Link>
+            <Link to={"/profile/"}>profile example</Link>
         </Defaultlayout>
     )
 }
