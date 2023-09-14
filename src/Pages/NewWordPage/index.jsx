@@ -1,6 +1,7 @@
 import { Button, Form, Input, Select, Space, Tooltip, Typography } from "antd";
 import Defaultlayout from "../../Layouts/Default";
 import { useState } from "react";
+import { getlanguages } from "../../api/languages";
 
 
 const onFinish = (values) => {
@@ -11,7 +12,7 @@ const onFinish = (values) => {
   const languageFiller = () => {
         return ['Zhejiang', 'Jiangsu']
   }
-
+console.log(await getlanguages())
 const NewWordPage = () => {
  
     const [languages, setLanguages] = useState([]);
