@@ -12,13 +12,22 @@ const onFinish = (values) => {
   const languageFiller = () => {
         return ['Zhejiang', 'Jiangsu']
   }
-console.log(await getlanguages())
+
+
+
 const NewWordPage = () => {
  
     const [languages, setLanguages] = useState([]);
     if (languages.length == 0) {
-        setLanguages(languageFiller())
+        setLanguages(languageFiller())//TODO
     }
+
+
+
+    const handleSubmit = (e)=>{
+        console.log(e)
+    }
+
 
 
 
@@ -48,6 +57,7 @@ const NewWordPage = () => {
                 message: 'language is required',
                 },
             ]}
+            onFinish={handleSubmit}
             >
             <Select placeholder="Select language">
                 {languages.map((e)=>{

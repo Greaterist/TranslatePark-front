@@ -54,8 +54,12 @@ const AddTranslation = (props) => {
     const handleSearch = (value) => {
       setOptions(value ? searchResult(value) : []); //TODO change searchResult to backend request 
     };
+
+    
     const onSelect = (value) => {
-      console.log('onSelect', value);
+      console.log(props);
+      console.log(value);
+      setText(value);
     };
 
 
@@ -67,6 +71,7 @@ const AddTranslation = (props) => {
     const handleButton = () => {
         console.log(text)
     }
+
 
 
 
@@ -89,11 +94,8 @@ const AddTranslation = (props) => {
       <Input 
       defaultValue=""
       onChange={handleInput}
+      value={text}
       />
-      <Button 
-      type="primary"
-      onClick={handleButton}
-      >+</Button>
     </Space.Compact>
             </AutoComplete>
                 </>}
@@ -101,6 +103,7 @@ const AddTranslation = (props) => {
                 trigger="click"
                 open={open}
                 onOpenChange={handleOpenChange}
+                onSelect={onSelect}
                 >
                     <Button>+</Button>
         </Popover>

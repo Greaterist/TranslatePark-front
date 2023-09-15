@@ -1,7 +1,7 @@
 import Sider from "antd/es/layout/Sider";
 import Defaultlayout from "../../Layouts/Default";
 import { Content, Footer } from "antd/es/layout/layout";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getById } from "../../api/words";
 import styles from "./index.module.scss";
 import { Link, useParams } from "react-router-dom";
@@ -14,15 +14,11 @@ import TextArea from "antd/es/input/TextArea";
 import AddTranslation from "../../Components/AddTranslation";
 
 
-const TranslationPage = () => {
+const TranslationPage = React.forwardRef(() => {
     const [WordList, setWordList] = useState([]);
     const [CommList, setCommList] = useState([]);
     const [UserMessage, setUserMessage] = useState('')
     const { id } = useParams();
-
-    /*useEffect(async ()=>{
-        importWord(await getById(id))
-    });*/
 
     function onMessageChange(e){
         setUserMessage(e.target.value)
@@ -54,7 +50,7 @@ const TranslationPage = () => {
                 <p className={styles.spelling}>{WordList.spelling}</p>
                 <div className="flex">
                     <TranslationWord word={WordList.translation} opacity={0.5}/>
-                    <AddTranslation word={WordList.word}/>
+                    <AddTranslation id={WordList.id}/>
                 </div>
                 
                 </div>
@@ -111,7 +107,7 @@ const TranslationPage = () => {
             </Footer>
         </Defaultlayout>
     )
-}
+})
 
 
 
