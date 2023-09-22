@@ -2,13 +2,15 @@ import { AutoComplete, Button, Input, Menu } from "antd";
 import Search from "antd/es/input/Search";
 import { Header } from "antd/es/layout/layout";
 import styles from "./index.module.scss";
-import { Link, redirect } from "react-router-dom";
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getWordSearch } from "../../api/words";
 
 const getRandomInt = (max, min = 0) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
 const searchResult = (query) =>
-  new Array(getRandomInt(5))
+  new Array(query)
     .join(".")
     .split(".")
     .map((_, idx) => {
@@ -40,13 +42,24 @@ const searchResult = (query) =>
     });
 
 const DefaultHeader = () => {
+
+
+  const navigate = useNavigate();
   const [options, setOptions] = useState([]);
   const handleSearch = (value) => {
-    setOptions(value ? searchResult(value) : []); //TODO change searchResult to backend request
-  };
-  const onSelect = (value) => {
-    console.log("onSelect", value);
-  };
+    if(value){
+      getWordSearch(value).then((res)=>{
+        setOptions(res.map(e => ({value: e.word, id:e.id})))
+      })
+    }
+  }
+    
+
+
+  const onSelect = (value, option) =>{
+    
+    navigate(`/translation/${option.id}`)
+  } 
 
   return (
     <Header style={{ display: "flex", alignItems: "center" }}>
@@ -60,7 +73,7 @@ const DefaultHeader = () => {
         }}
         options={options}
         onSelect={onSelect}
-        onSearch={handleSearch}
+        onSearch={(text) => handleSearch(text)}
       >
         <Input.Search size="large" placeholder="input here" enterButton />
       </AutoComplete>

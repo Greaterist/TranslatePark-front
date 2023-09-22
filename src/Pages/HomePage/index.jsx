@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Defaultlayout from "../../Layouts/Default";
 
+
 const HomePage = () => {
   return (
     <Defaultlayout>

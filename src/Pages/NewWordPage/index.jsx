@@ -42,7 +42,7 @@ const NewWordPage = () => {
         <Form.Item label="Language">
           <Space.Compact>
             <Form.Item
-              name={["language", "language"]}
+              name="language"
               noStyle
               rules={[
                 {
