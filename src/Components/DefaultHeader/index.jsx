@@ -6,51 +6,17 @@ import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getWordSearch } from "../../api/words";
 
-const getRandomInt = (max, min = 0) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const searchResult = (query) =>
-  new Array(query)
-    .join(".")
-    .split(".")
-    .map((_, idx) => {
-      const category = `${query}${idx}`;
-      return {
-        value: category,
-        label: (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              color: "red",
-            }}
-          >
-            <span>
-              Found {query} on{" "}
-              <a
-                href={`https://s.taobao.com/search?q=${query}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {category}
-              </a>
-            </span>
-            <span>{getRandomInt(200, 100)} results</span>
-          </div>
-        ),
-      };
-    });
 
 const DefaultHeader = () => {
 
 
   const navigate = useNavigate();
   const [options, setOptions] = useState([]);
-  const handleSearch = (value) => {
+  const handleSearch = async (value) => {
     if(value){
-      getWordSearch(value).then((res)=>{
-        setOptions(res.map(e => ({value: e.word, id:e.id})))
-      })
+        const res = await getWordSearch(value)
+        const updatedOptions = res.map(e => ({value: e.word, id:e.id}))
+        return updatedOptions
     }
   }
     
@@ -73,7 +39,7 @@ const DefaultHeader = () => {
         }}
         options={options}
         onSelect={onSelect}
-        onSearch={(text) => handleSearch(text)}
+        onSearch={async (text) => setOptions( await handleSearch(text))}
       >
         <Input.Search size="large" placeholder="input here" enterButton />
       </AutoComplete>
