@@ -38,7 +38,7 @@ const TranslationWord = (props) => {
       onOpenChange={handleOpenChange}
     >
       <p className={styles.translation} style={opacity()}>
-        {props.word}
+        {props.word} ({props.rating})
       </p>
     </Popover>
   );

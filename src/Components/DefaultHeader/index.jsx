@@ -20,11 +20,11 @@ const DefaultHeader = () => {
     }
   }
     
-
+  
 
   const onSelect = (value, option) =>{
-    
-    navigate(`/translation/${option.id}`)
+    window.location.href = `/translation/${option.id}`;
+    return redirect(`/translation/${option.id}`)
   } 
 
   return (
@@ -41,7 +41,7 @@ const DefaultHeader = () => {
         onSelect={onSelect}
         onSearch={async (text) => setOptions( await handleSearch(text))}
       >
-        <Input.Search size="large" placeholder="input here" enterButton />
+        
       </AutoComplete>
       <div>
         <Link to="/profile/" className={styles.nav}>

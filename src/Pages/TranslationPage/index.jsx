@@ -2,12 +2,12 @@ import Sider from "antd/es/layout/Sider";
 import Defaultlayout from "../../Layouts/Default";
 import { Content, Footer } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
-import { getById } from "../../api/words";
+import { getById, getTranslationById } from "../../api/words";
 import styles from "./index.module.scss";
 import { Link, useParams } from "react-router-dom";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { Button, Card, Layout, Popover, Statistic } from "antd";
-import { getCommentaries } from "../../api/commentaries";
+import { getCommentariesById } from "../../api/commentaries";
 import Comments from "../../Components/Comments";
 import TranslationWord from "../../Components/TranslationWord";
 import TextArea from "antd/es/input/TextArea";
@@ -15,6 +15,7 @@ import AddTranslation from "../../Components/AddTranslation";
 
 const TranslationPage = React.forwardRef(() => {
   const [WordList, setWordList] = useState([]);
+  const [targetWord, setTargetWord] = useState([]);
   const [CommList, setCommList] = useState([]);
   const [UserMessage, setUserMessage] = useState("");
   const { id } = useParams();
@@ -28,15 +29,22 @@ const TranslationPage = React.forwardRef(() => {
   }
 
   useEffect(() => {
-    async function importWord() {
-      setWordList(await getById(id));
+    async function importWord(id) {
+      setTargetWord(await getById(id));
+      setWordList(await getTranslationById(id))
+      //console.log(await getTranslationById(id))
+      //console.log(await getById(id))
     }
     importWord(id);
-    async function importComm() {
-      setCommList(await getCommentaries());
+    async function importComm(id) {
+      setCommList(await getCommentariesById(id));
+      console.log(await getCommentariesById(id));
     }
-    importComm();
+    importComm(id);
   }, []);
+
+
+  
 
   return (
     <Defaultlayout>
@@ -45,10 +53,12 @@ const TranslationPage = React.forwardRef(() => {
           <Card title="TRANSLATION">
             <Card.Grid hoverable={false} style={{ width: "75%" }}>
               <div>
-                <p className={styles.word}>{WordList.word}</p>
-                <p className={styles.spelling}>{WordList.spelling}</p>
+                <p className={styles.word}>{targetWord.word}</p>
+                <p className={styles.spelling}>{targetWord.phonetic}</p>
                 <div className="flex">
-                  <TranslationWord word={WordList.translation} opacity={0.5} />
+                  {WordList.map((e, i, arr)=><TranslationWord word={e.word} rating={e.rating} key={i} opacity={1-(1/arr.length*i)} />
+                  )
+                  }
                   <AddTranslation id={WordList.id} />
                 </div>
               </div>
