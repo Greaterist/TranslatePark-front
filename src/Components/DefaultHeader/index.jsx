@@ -43,15 +43,19 @@ const DefaultHeader = () => {
       >
         
       </AutoComplete>
-      <div>
-        <Link to="/profile/" className={styles.nav}>
-          {" "}
-          <Button>Profile</Button>
-        </Link>
+      <div className={styles.flex}>
+        
         <Link to="/newword/" className={styles.nav}>
           {" "}
           <Button>Add New Word</Button>
         </Link>
+        <div className={styles.nav}>
+        <Link to="/profile/" className={[styles.right]}>
+          {" "}
+          <Button>Profile</Button>
+        </Link>
+        </div>
+        
       </div>
     </Header>
   );

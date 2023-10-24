@@ -4,6 +4,7 @@ import TranslationPage from "./TranslationPage";
 import ProfilePage from "./ProfilePage";
 import NewWordPage from "./NewWordPage";
 import AuthorizationPage from "./AuthorizationPage";
+import RegistrationPage from "./RegistrationPage";
 
 const RoutesList = () => {
   return (
@@ -13,6 +14,7 @@ const RoutesList = () => {
       <Route path="/translation/:id" element={<TranslationPage />} />
       <Route path="/newword/" element={<NewWordPage />} />
       <Route path="/auth/" element={<AuthorizationPage />} />
+      <Route path="/register/" element={<RegistrationPage />} />
     </Routes>
   );
 };
